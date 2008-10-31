@@ -1,0 +1,62 @@
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+	<!-- from jacobson-web-warehouse main resources-->
+	<!--
+xmlns:log4j="http://jakarta.apache.org/log4j/"
+-->
+	<!--
+       
+          Log4J Configuration Quick Reference:
+          ====================================
+       
+          
+          Priority order is DEBUG < INFO < WARN < ERROR < FATAL
+       
+        
+          PatternLayout conversion characters:
+           
+           %c   Category of the logging event
+           %C   Fully qualified class name of the caller (example: %C{1} would show just the class name instead of the full class name);
+           %d   Date of the logging event  (example: %d{HH:mm:ss,SSS} )
+           %F   File name where the logging request was issued (caution: extremely slow)
+           %l   Location information of the caller (caution: extremely slow)
+           %L   Line number from where the logging request was issued (caution: extremely slow)
+           %m   Application-supplied message
+           %M   Method name from where the logging request was issued (caution: extremely slow)
+           %n   Line separator
+           %p   Priority of the logging event
+           %r   Number of milliseconds since the start of the application
+           %t   Name of the thread that generated the logging event
+           %x   Nested diagnotic context associated with the thread
+           %%   A single percent sign
+       
+          Format modifiers examples:
+          
+           %20c     Left pad with spaces if category is less than 20 characters long
+           %-20c    Right pad with spaces if category is less than 20 characters long
+           %.30c    Truncate from the beginning if category is more than 30 chars long
+           %20.30c  Left pad 20 chars + truncate from beginning if more than 30 chars
+           %-20.30c Right pad 20 chars + truncate from beginning if more than 30 chars
+       
+          Examples:  "%r [%t] %-5p %c %x - %m\n"
+                     "%-6r [%15.15t] %-5p %30.30c %x - %m\n"  
+                      
+      -->
+	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/var/log/metova/ghostwriter.log"/>
+		<param name="DatePattern" value="'.'yyyy-MM-dd"/>
+		<param name="Append" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}-%t][%c{1}][%-5p] - %m\n"/>
+		</layout>
+	</appender>
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}-%t][%c{1}][%-5p] - %m\n"/>
+		</layout>
+	</appender>
+	<root>
+		<priority value="debug"/>
+		<appender-ref ref="console"/>
+	</root>
+</log4j:configuration>
